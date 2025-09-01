@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siam Arif</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-user-shield"></i> Admin Login</h1>
+                <p>Enter your credentials to access the admin panel</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            <div id="login-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Main Admin Panel -->
+    <div id="admin-panel" class="admin-panel" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1><i class="fas fa-tachometer-alt"></i> Portfolio Admin Panel</h1>
+                <div class="header-actions">
+                    <span class="user-info">Welcome, Admin</span>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" data-tab="projects">
+                    <i class="fas fa-code"></i> Projects
+                </li>
+                <li class="nav-tab" data-tab="contests">
+                    <i class="fas fa-trophy"></i> Contests
+                </li>
+                <li class="nav-tab" data-tab="messages">
+                    <i class="fas fa-envelope"></i> Messages
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Projects Tab -->
+            <div id="projects-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h2><i class="fas fa-code"></i> Manage Projects</h2>
+                    <button id="add-project-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Project
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="projects-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Technologies</th>
+                                <th>Links</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Contests Tab -->
+            <div id="contests-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-trophy"></i> Manage Contests</h2>
+                    <button id="add-contest-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Contest
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="contests-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Contest Name</th>
+                                <th>Rank</th>
+                                <th>Team Name</th>
+                                <th>Standing Link</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="messages-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-envelope"></i> Contact Messages</h2>
+                </div>
+                <div class="table-container">
+                    <table id="messages-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Received</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Project Form -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="project-modal-title">Add New Project</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="project-form" class="modal-form">
+                <input type="hidden" id="project-id" name="id">
+                <div class="form-group">
+                    <label for="project-name">Project Name *</label>
+                    <input type="text" id="project-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Description *</label>
+                    <textarea id="project-description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-technologies">Technologies (comma-separated)</label>
+                    <input type="text" id="project-technologies" name="technologies" placeholder="HTML, CSS, JavaScript, PHP">
+                </div>
+                <div class="form-group">
+                    <label for="project-github">GitHub Link</label>
+                    <input type="url" id="project-github" name="github_link" placeholder="https://github.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="project-demo">Demo Link</label>
+                    <input type="url" id="project-demo" name="demo_link" placeholder="https://demo.example.com">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('project-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Contest Form -->
+    <div id="contest-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="contest-modal-title">Add New Contest</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="contest-form" class="modal-form">
+                <input type="hidden" id="contest-id" name="id">
+                <div class="form-group">
+                    <label for="contest-name">Contest Name *</label>
+                    <input type="text" id="contest-name" name="contest_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contest-rank">Rank *</label>
+                    <input type="text" id="contest-rank" name="rank" required placeholder="e.g., 1st, 42, 156">
+                </div>
+                <div class="form-group">
+                    <label for="contest-team">Team Name</label>
+                    <input type="text" id="contest-team" name="team_name" placeholder="Leave empty for solo participation">
+                </div>
+                <div class="form-group">
+                    <label for="contest-standing">Standing Link</label>
+                    <input type="url" id="contest-standing" name="standing_link" placeholder="https://standings.example.com">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('contest-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Contest</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Details Modal -->
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Message Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div id="message-details" class="message-details">
+                <!-- Message details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>
